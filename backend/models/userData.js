@@ -16,9 +16,10 @@ const userRating = new mongoose.Schema({
         type : String,
         required: true
     },
-    // leetcode : {
-    //     type : String
-    // },
+    leetcode : {
+        type : String,
+        required : true
+    },
     // codechef : {
     //     type : String
     // }

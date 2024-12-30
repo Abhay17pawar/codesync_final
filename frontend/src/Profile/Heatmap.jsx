@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import axios from "axios";
 
 const Heatmap = ({ activityData }) => {
-  // Get the last 5 months dynamically
   const getLastFiveMonths = () => {
     const months = [];
     for (let i = 0; i < 5; i++) {
       const date = dayjs().subtract(i, "month");
       months.push({
-        name: date.format("MMM"), // Get short month name
-        year: date.year(), // Year to differentiate between years if needed
-        days: date.daysInMonth(), // Get the number of days in the month
+        name: date.format("MMM"), 
+        year: date.year(), 
+        days: date.daysInMonth(), 
       });
     }
-    return months.reverse(); // Reverse to display in chronological order
+    return months.reverse(); 
   };
 
   // Map activity counts to colors
@@ -27,7 +27,10 @@ const Heatmap = ({ activityData }) => {
   const months = getLastFiveMonths();
 
   return (
-    <div className="bg-gradient-to-b from-gray-800 to-gray-900 p-5 rounded-lg shadow-md max-h-[240px] mt-20 "style={{ position: 'relative', left: '25px', top: '48px' }} >
+    <div
+      className="bg-gradient-to-b from-gray-800 to-gray-900 p-5 rounded-lg shadow-md max-h-[240px] mt-20"
+      style={{ position: "relative", left: "25px", top: "48px" }}
+    >
       <h2 className="text-white text-lg font-semibold mb-4">
         Activity Heatmap
       </h2>
@@ -40,7 +43,7 @@ const Heatmap = ({ activityData }) => {
             <div className="grid grid-cols-7 gap-1">
               {Array.from({ length: month.days }).map((_, dayIdx) => {
                 const activityCount =
-                  activityData?.[`${month.name}-${month.year}`]?.[dayIdx] || 0;   
+                  activityData?.[`${month.name}-${month.year}`]?.[dayIdx] || 0; // Daily activity
                 return (
                   <div
                     key={dayIdx}
@@ -58,18 +61,73 @@ const Heatmap = ({ activityData }) => {
 };
 
 const Heatmaps = () => {
-  const activityData = {
-    "Jul-2023": Array(31).fill().map(() => Math.floor(Math.random() * 4)),
-    "Aug-2023": Array(31).fill().map(() => Math.floor(Math.random() * 4)),
-    "Sep-2023": Array(30).fill().map(() => Math.floor(Math.random() * 4)),
-    "Oct-2023": Array(31).fill().map(() => Math.floor(Math.random() * 4)),
-    "Nov-2023": Array(30).fill().map(() => Math.floor(Math.random() * 4)),
-    "Dec-2023": Array(31).fill().map(() => Math.floor(Math.random() * 4)),
-  };
+  const [activityData, setActivityData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  return (
-      <Heatmap activityData={activityData} />
-  );
+  useEffect(() => {
+    const codeforcesHandle = localStorage.getItem("userCodeforces");
+
+    if (!codeforcesHandle) {
+      setError("Codeforces handle not found.");
+      setLoading(false);
+      return;
+    }
+
+    const fetchActivityData = async () => {
+      try {
+        const response = await axios.get(
+          `https://codeforces.com/api/user.status?handle=${codeforcesHandle}`
+        );
+
+        if (response.data.status === "OK") {
+          const submissions = response.data.result;
+          const activityMap = {};
+
+          // Process submissions
+          submissions.forEach((submission) => {
+            const date = dayjs.unix(submission.creationTimeSeconds);
+            const monthKey = `${date.format("MMM")}-${date.year()}`;
+            const dayIndex = date.date() - 1; 
+
+            if (!activityMap[monthKey]) {
+              activityMap[monthKey] = Array(date.daysInMonth()).fill(0);
+            }
+
+            activityMap[monthKey][dayIndex] += 1; // Increment count for the day
+          });
+
+          setActivityData(activityMap);
+        } else {
+          setError("Failed to fetch data from Codeforces.");
+        }
+      } catch (err) {
+        setError("Error fetching data from Codeforces API.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchActivityData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-white text-center">
+        <p>Loading activity data...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-400 text-center">
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  return <Heatmap activityData={activityData} />;
 };
 
 export default Heatmaps;

@@ -6,10 +6,10 @@ import "./CodeforcesHandle.css";
 
 const Login = () => {
   const canvasRef = useRef(null);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
-  // Canvas effect for the Matrix-like animation
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -65,12 +65,14 @@ const Login = () => {
       const token = response.data.token;
       const email = response.data.email;
       const codeforces = response.data.codeforces;
+      const leetcode = response.data.leetcode;
   
       if (token) {
         // Store the token and user info (email and codeforces) in localStorage
         localStorage.setItem("authToken", token);  // Store the JWT token
         localStorage.setItem("userEmail", email);  // Store the email
         localStorage.setItem("userCodeforces", codeforces);  // Store the Codeforces handle
+        localStorage.setItem("userleetcode", leetcode);  
         console.log("Token and user details successfully stored in localStorage:", token);
   
         // Navigate to the home page after login (or wherever needed)

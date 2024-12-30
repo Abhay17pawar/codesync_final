@@ -6,7 +6,7 @@ import "./CodeforcesHandle.css";
 
 const CodeforcesHandle = () => {
   const canvasRef = useRef(null);
-  const { register, handleSubmit, reset } = useForm(); 
+  const { register, handleSubmit } = useForm(); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,12 +52,12 @@ const CodeforcesHandle = () => {
     try {
       console.log("Submitting to backend:", data);
 
-      // Send data to the backend
       const response = await axios.post("http://localhost:3000/api/signup", {
         name: data.name,
         email: data.email,
         password: data.password,
-        codeforces: data.codeforces // updated to match field name
+        codeforces: data.codeforces,
+        leetcode : data.leetcode
       });
 
       console.log("Backend response:", response.data);
@@ -105,12 +105,18 @@ const CodeforcesHandle = () => {
           className="form-input"
         />
 
+        <input
+          type="text"
+          {...register("leetcode", { required: true })}  
+          placeholder="Enter leetcode Handle"
+          className="form-input"
+        />
+
         <button type="submit" className="form-button">
           Submit
         </button>
       </form>
 
-      {/* Canvas for the Matrix effect */}
       <canvas ref={canvasRef} className="matrix-canvas"></canvas>
     </div>
   );

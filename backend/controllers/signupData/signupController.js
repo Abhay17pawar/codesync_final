@@ -29,7 +29,8 @@ const loginController = async (req, res) => {
       message: "Login successful",
       token,  // Send JWT token back to the client
       email: existingUser.email,
-      codeforces: existingUser.codeforces // Optional: Send Codeforces ID if you need
+      codeforces: existingUser.codeforces,
+      leetcode : existingUser.leetcode
     });
 
   } catch (error) {
@@ -39,9 +40,9 @@ const loginController = async (req, res) => {
 };
 
 const signupController = async (req, res) => {
-  const { name, email, password, codeforces } = req.body;
+  const { name, email, password, codeforces, leetcode } = req.body;
 
-  if (!name || !email || !password || !codeforces) {
+  if (!name || !email || !password || !codeforces || !leetcode) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -58,6 +59,7 @@ const signupController = async (req, res) => {
       email,
       password: hashedPassword,
       codeforces,
+      leetcode
     });
 
     await newUser.save();
