@@ -6,17 +6,15 @@ async function getSolvedProblems(req, res) {
 
   try {
     let solvedProblemIds = new Set();
-    let contestIndex = 1;  // Start from the first page of results
+    let contestIndex = 1;  
     let hasNextPage = true;
 
     while (hasNextPage) {
-      // Make a request to the Codeforces API for user status with pagination
       const response = await axios.get(`https://codeforces.com/api/user.status?handle=${handle}&from=${contestIndex}&count=100`);
 
       if (response.data.status === 'OK') {
         const submissions = response.data.result;
         
-        // If no submissions are found, end the loop
         if (submissions.length === 0) {
           hasNextPage = false;
           break;

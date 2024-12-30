@@ -1,14 +1,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const userRatingRoutes = require("./routes/userData");
-require('dotenv').config();
-
+const userdata = require("./routes/SignupRoute/signup");
 const app = express();
+require('dotenv').config();
+const cors = require('cors');
 
-// Middleware to parse JSON bodies
+app.use(cors());
+const events = require('events');
+
+events.EventEmitter.defaultMaxListeners = 20;
+
 app.use(express.json());
 
 app.use('/api', userRatingRoutes);
+app.use('/api',userdata);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected!"))

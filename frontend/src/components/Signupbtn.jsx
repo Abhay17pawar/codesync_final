@@ -4,7 +4,7 @@ import { FaArrowRight } from 'react-icons/fa';
 
 const GetStartedButton = () => {
   const handleClick = () => {
-    window.location.href = '/signup'; // Direct navigation
+    window.location.href = '/signup'; 
   };
 
   return (
