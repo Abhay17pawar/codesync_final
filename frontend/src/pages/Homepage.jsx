@@ -5,6 +5,8 @@ import Totalques from '../Profile/Totalques';
 import Heatmaps from '../Profile/Heatmap';
 import Totalcontest from '../Profile/Totalcontest';
 import ProblemsSolved from '../Profile/ProfileQues';
+import RatingChart from '../Profile/Charts';
+import CodeforcesRatingChart from '../Profile/ChartsCf';
 
 const Homepage = () => {
   return (
@@ -21,6 +23,10 @@ const Homepage = () => {
         </div>
         <Heatmaps />
       </div>
+        <div>
+        <RatingChart/>
+        <CodeforcesRatingChart/>
+        </div>
     </div>
   );
 };

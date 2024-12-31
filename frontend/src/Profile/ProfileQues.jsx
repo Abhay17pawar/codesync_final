@@ -76,12 +76,8 @@ const ProblemsSolved = () => {
       style={{ position: 'relative', left: '33px', top: '12px' }} 
     >
       <h2 className="text-2xl font-bold text-white mb-3">Problems Solved</h2>
-
-      {/* DSA Section */}
       <div style={{ marginBottom: '5px' }}> 
         <h3 className="text-xl font-semibold text-white mb-0">DSA</h3>
-
-        {/* DSA Pie Chart */}
         <div className="mt-6">
           <Stack direction="row" width="100%" textAlign="center" spacing={2}>
             <Box flexGrow={1}>
