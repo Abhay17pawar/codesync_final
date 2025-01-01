@@ -1,0 +1,159 @@
+/* Calendar container styling */
+.calendar-container {
+    text-align: center;
+  }
+  
+  /* Month display styling */
+  .month-display {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  /* Calendar grid styling */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  /* Weekdays styling */
+  .weekday {
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  /* Date styling */
+  .calendar-day {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+ 
+  
+  .calendar-day.today {
+    background-color: #f0f8ff;
+  }
+  
+  .calendar-day.contest-day {
+    background-color: #ffe0b3;
+  }
+  
+  .event-details-hover {
+    position: absolute;
+    top: -30px; /* Position above the date */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffeb3b;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .event-details-hover p {
+    margin: 0;
+    font-size: 0.9em;
+  }
+  /* Calendar container styling */
+.calendar-container {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Month display styling */
+  .month-display {
+    font-size: 2em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Calendar grid styling */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 35px;
+  }
+  
+  /* Weekdays styling */
+  .weekday {
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    font-size: 1.2em;
+  }
+  
+  /* Date styling */
+  .calendar-day {
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    position: relative; /* Added to allow absolute positioning of hover details */
+    border-radius: 5px;
+    transition: all 0.3s ease; /* Smooth transition for background */
+  }
+  
+ 
+  
+  .calendar-day.today {
+    background-color: #b3e0ff; /* Light blue for today's date */
+    color: #0077cc;
+  }
+  
+  .calendar-day.contest-day {
+    background-color: #ffecb3; /* Light yellow for contest days */
+    color: #f57c00;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .calendar-day.contest-day:hover {
+    background-color: #ffcc80; /* Darker yellow on hover */
+    color: #ff5722;
+  }
+  
+  .event-details-hover {
+    position: absolute;
+    top: -40px; /* Position above the date */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50; /* Green background for contest details */
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 0.9em;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  .calendar-day.contest-day:hover .event-details-hover {
+    opacity: 1;
+  }
+  
+  .event-details-hover p {
+    margin: 0;
+  }
+  
+  /* For smooth hover transitions on dates */
+  .calendar-day:hover {
+    background-color: #ffeb3b; /* Light yellow on hover */
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  .notify-me-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .notify-me-btn:hover {
+    background-color: #0056b3;
+  }
+  

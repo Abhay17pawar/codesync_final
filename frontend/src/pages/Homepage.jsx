@@ -7,9 +7,14 @@ import Totalcontest from '../Profile/Totalcontest';
 import ProblemsSolved from '../Profile/ProfileQues';
 import RatingChart from '../Profile/Charts';
 import CodeforcesRatingChart from '../Profile/ChartsCf';
+import BadgeIcons from '../Profile/BadgesLeetcode';
+import Calendars from './Calender';
 
 const Homepage = () => {
   return (
+    // <>
+    // <Calendars />
+    // </>
     <div className="h-screen overflow-y-scroll"> 
       <div className="flex space-x-6"> 
         <div>
@@ -26,6 +31,9 @@ const Homepage = () => {
         <div>
         <RatingChart/>
         <CodeforcesRatingChart/>
+        </div>
+        <div>
+          <BadgeIcons/>
         </div>
     </div>
   );
