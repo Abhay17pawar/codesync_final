@@ -9,33 +9,38 @@ import RatingChart from '../Profile/Charts';
 import CodeforcesRatingChart from '../Profile/ChartsCf';
 import BadgeIcons from '../Profile/BadgesLeetcode';
 import Calendars from './Calender';
+import BadgeCF from '../Profile/BadgeCF';
+import UserCard from '../Profile/BadgeCC';
 
 const Homepage = () => {
   return (
-    // <>
-    // <Calendars />
-    // </>
-    <div className="h-screen overflow-y-scroll"> 
-      <div className="flex space-x-6"> 
-        <div>
-          <UserButton />
-          <ProfileCard />
-          <ProblemsSolved />
-        </div>
-        <div>
-          <Totalques />
-          <Totalcontest />
-        </div>
-        <Heatmaps />
-      </div>
-        <div>
-        <RatingChart/>
-        <CodeforcesRatingChart/>
-        </div>
-        <div>
-          <BadgeIcons/>
-        </div>
-    </div>
+    <>
+    <Calendars />
+    {/* <ProfileCard /> */}
+    </>
+    // <div className="h-screen overflow-y-scroll"> 
+    //   <div className="flex space-x-6"> 
+    //     <div>
+    //       <UserButton />
+    //       <ProfileCard />
+    //       <ProblemsSolved />
+    //     </div>
+    //     <div>
+    //       <Totalques />
+    //       <Totalcontest />
+    //     </div>
+    //     <Heatmaps />
+    //   </div>
+    //     <div>
+    //     <RatingChart/>
+    //     <CodeforcesRatingChart/>
+    //     </div>
+    //     <div>
+    //       <BadgeIcons/>
+    //       <BadgeCF/>
+    //       <UserCard/>
+    //     </div>
+    //  </div>
   );
 };
 

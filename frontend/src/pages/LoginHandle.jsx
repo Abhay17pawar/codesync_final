@@ -63,16 +63,20 @@ const Login = () => {
   
       // Check if the response contains a token
       const token = response.data.token;
+      const name = response.data.name;
       const email = response.data.email;
       const codeforces = response.data.codeforces;
       const leetcode = response.data.leetcode;
+      const codechef = response.data.codechef;
   
       if (token) {
         // Store the token and user info (email and codeforces) in localStorage
         localStorage.setItem("authToken", token);  // Store the JWT token
+        localStorage.setItem("userName", name);
         localStorage.setItem("userEmail", email);  // Store the email
         localStorage.setItem("userCodeforces", codeforces);  // Store the Codeforces handle
         localStorage.setItem("userleetcode", leetcode);  
+        localStorage.setItem("usercodechef", codechef);  
         console.log("Token and user details successfully stored in localStorage:", token);
   
         // Navigate to the home page after login (or wherever needed)

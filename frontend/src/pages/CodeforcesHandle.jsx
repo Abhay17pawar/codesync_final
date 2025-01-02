@@ -57,7 +57,8 @@ const CodeforcesHandle = () => {
         email: data.email,
         password: data.password,
         codeforces: data.codeforces,
-        leetcode : data.leetcode
+        leetcode : data.leetcode,
+        codechef : data.codechef
       });
 
       console.log("Backend response:", response.data);
@@ -109,6 +110,13 @@ const CodeforcesHandle = () => {
           type="text"
           {...register("leetcode", { required: true })}  
           placeholder="Enter leetcode Handle"
+          className="form-input"
+        />
+
+        <input
+          type="text"
+          {...register("codechef", { required: true })}  
+          placeholder="Enter codechef Handle"
           className="form-input"
         />
 

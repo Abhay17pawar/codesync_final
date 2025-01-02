@@ -28,9 +28,11 @@ const loginController = async (req, res) => {
     return res.status(200).json({
       message: "Login successful",
       token,  // Send JWT token back to the client
+      name : existingUser.name,
       email: existingUser.email,
       codeforces: existingUser.codeforces,
-      leetcode : existingUser.leetcode
+      leetcode : existingUser.leetcode,
+      codechef : existingUser.codechef
     });
 
   } catch (error) {
@@ -40,9 +42,9 @@ const loginController = async (req, res) => {
 };
 
 const signupController = async (req, res) => {
-  const { name, email, password, codeforces, leetcode } = req.body;
+  const { name, email, password, codeforces, leetcode, codechef } = req.body;
 
-  if (!name || !email || !password || !codeforces || !leetcode) {
+  if (!name || !email || !password || !codeforces || !leetcode || !codechef) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -59,7 +61,8 @@ const signupController = async (req, res) => {
       email,
       password: hashedPassword,
       codeforces,
-      leetcode
+      leetcode,
+      codechef
     });
 
     await newUser.save();

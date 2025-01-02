@@ -15,16 +15,6 @@ events.EventEmitter.defaultMaxListeners = 20;
 
 app.use(express.json());
 
-app.get("/api/badges", async (req, res) => {
-    try {
-      const response = await axios.get("https://leetcode-badge-showcase.vercel.app/api?username=viper_01");
-      res.json(response.data); // Forward the API response to the frontend
-    } catch (error) {
-      console.error("Error fetching badges:", error.message);
-      res.status(500).json({ error: "Error fetching badges" });
-    }
-  });
-
 app.use('/api', userRatingRoutes);
 app.use('/api',userdata);
 

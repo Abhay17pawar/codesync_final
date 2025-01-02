@@ -7,9 +7,12 @@ const JWT_SECRET = 'your_secret_key'; // Use a more secure secret key in product
 const generateToken = (user) => {
   return jwt.sign(
     {
-      userId: user.id,          // Add user-specific data (e.g., user ID) to the token
+      userId: user.id,
+      name : user.name,
       email: user.email,
-      codeforces: user.codeforces        // You can also add email, roles, etc.
+      codeforces: user.codeforces,
+      leetcode : user.leetcode,
+      codechef : user.codechef
     },
     JWT_SECRET,
     { expiresIn: '1h' } // The token will expire in 1 hour

@@ -20,9 +20,9 @@ const userRating = new mongoose.Schema({
         type : String,
         required : true
     },
-    // codechef : {
-    //     type : String
-    // }
+    codechef : {
+        type : String
+    }
 }, {
     timestamps : true
 });
