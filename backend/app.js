@@ -1,9 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const axios = require("axios");
-const cheerio = require("cheerio");
-const userRatingRoutes = require("./routes/userData");
 const userdata = require("./routes/SignupRoute/signup");
+const calender = require("./routes/userData");
 const app = express();
 require('dotenv').config();
 const cors = require('cors');
@@ -15,8 +14,8 @@ events.EventEmitter.defaultMaxListeners = 20;
 
 app.use(express.json());
 
-app.use('/api', userRatingRoutes);
 app.use('/api',userdata);
+app.use('/api',calender);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB connected!"))

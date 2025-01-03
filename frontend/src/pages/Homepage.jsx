@@ -8,39 +8,40 @@ import ProblemsSolved from '../Profile/ProfileQues';
 import RatingChart from '../Profile/Charts';
 import CodeforcesRatingChart from '../Profile/ChartsCf';
 import BadgeIcons from '../Profile/BadgesLeetcode';
-import Calendars from './Calender';
+import Calendars from './Calender'; // Make sure this path is correct
 import BadgeCF from '../Profile/BadgeCF';
 import UserCard from '../Profile/BadgeCC';
 
 const Homepage = () => {
   return (
     <>
-    <Calendars />
-    {/* <ProfileCard /> */}
+   
+      <Calendars />
+      {/* <div className="h-screen overflow-y-scroll"> 
+        <div className="flex space-x-6"> 
+          <div>
+            <ProfileCard />
+            <UserButton />
+            <ProfileCard />
+            <ProblemsSolved />
+          </div>
+          <div>
+            <Totalques />
+            <Totalcontest />
+          </div>
+          <Heatmaps />
+        </div>
+        <div>
+          <RatingChart />
+          <CodeforcesRatingChart />
+        </div>
+        <div>
+          <BadgeIcons />
+          <BadgeCF />
+          <UserCard />
+        </div>
+      </div> */}
     </>
-    // <div className="h-screen overflow-y-scroll"> 
-    //   <div className="flex space-x-6"> 
-    //     <div>
-    //       <UserButton />
-    //       <ProfileCard />
-    //       <ProblemsSolved />
-    //     </div>
-    //     <div>
-    //       <Totalques />
-    //       <Totalcontest />
-    //     </div>
-    //     <Heatmaps />
-    //   </div>
-    //     <div>
-    //     <RatingChart/>
-    //     <CodeforcesRatingChart/>
-    //     </div>
-    //     <div>
-    //       <BadgeIcons/>
-    //       <BadgeCF/>
-    //       <UserCard/>
-    //     </div>
-    //  </div>
   );
 };
 

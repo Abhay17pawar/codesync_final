@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import './Calender.css'; // Import custom styles
 
 const CodeforcesCalendar = () => {
-  const [contests, setContests] = useState([]);
-  const [date, setDate] = useState(new Date());
-  const [selectedContest, setSelectedContest] = useState(null);
-  const [hoveredContest, setHoveredContest] = useState(null); // For hover state
+  const [contests, setContests] = useState([]); // Store the list of contests
+  const [date, setDate] = useState(new Date()); // Current selected date
+  const [selectedContest, setSelectedContest] = useState(null); // Selected contest on the clicked date
+  const [hoveredContest, setHoveredContest] = useState(null); // Contest shown on hover (for details)
+  const [notifyStates, setNotifyStates] = useState({}); // Store notify button states for each contest
+  const [email, setEmail] = useState(''); // State to store email ID
 
-  // Fetch upcoming Codeforces contests
+  // Fetch upcoming Codeforces contests from the API
   const fetchContests = async () => {
     try {
       const response = await fetch('https://codeforces.com/api/contest.list');
@@ -19,18 +21,30 @@ const CodeforcesCalendar = () => {
     }
   };
 
-  // Handle date selection
+  // Fetch notify states from localStorage on page load
+  const loadNotifyStates = () => {
+    const savedStates = localStorage.getItem('notifyStates');
+    return savedStates ? JSON.parse(savedStates) : {};
+  };
+
+  // Fetch email from localStorage on component mount
+  const loadEmail = () => {
+    const savedEmail = localStorage.getItem('email');
+    return savedEmail ? savedEmail : ''; // Default to empty string if no email found
+  };
+
+  // Handle date click (selecting a contest)
   const handleDateClick = (clickedDate) => {
     setDate(clickedDate);
-    // Check if there is any contest on the selected date
+    // Find the contest for this date
     const selectedContest = contests.find(contest => {
       const contestDate = new Date(contest.startTimeSeconds * 1000);
       return contestDate.toDateString() === clickedDate.toDateString();
     });
-    setSelectedContest(selectedContest || null);
+    setSelectedContest(selectedContest || null); // Set selected contest or null if none
   };
 
-  // Generate the calendar grid for the current month
+  // Generate calendar for the current month
   const generateCalendar = () => {
     const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
     const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
@@ -63,7 +77,7 @@ const CodeforcesCalendar = () => {
           key={i}
           onClick={() => handleDateClick(dayDate)}
           onMouseEnter={() => handleDateHover(dayDate)}
-          onMouseLeave={() => setHoveredContest(null)} // Reset hover
+          onMouseLeave={() => setHoveredContest(null)} // Reset hover state
         >
           {i}
           {contestOnThisDay && hoveredContest && (
@@ -86,7 +100,7 @@ const CodeforcesCalendar = () => {
     );
   };
 
-  // Handle hover event
+  // Handle hover event for contest details
   const handleDateHover = (dayDate) => {
     const contest = contests.find(contest => {
       const contestDate = new Date(contest.startTimeSeconds * 1000);
@@ -95,12 +109,12 @@ const CodeforcesCalendar = () => {
     setHoveredContest(contest);
   };
 
-  // Format contest date
+  // Format contest date to a readable format
   const formatDate = (timestamp) => {
     return new Date(timestamp * 1000).toLocaleString();
   };
 
-  // Get current month and year for display
+  // Get the month name from its index (e.g., 'January' from index 0)
   const getMonthName = (monthIndex) => {
     const monthNames = [
       'January', 'February', 'March', 'April', 'May', 'June',
@@ -109,14 +123,65 @@ const CodeforcesCalendar = () => {
     return monthNames[monthIndex];
   };
 
-  // Handle Notify Me button click
-  const handleNotifyMeClick = () => {
-    alert(`You will be notified about the contest: ${selectedContest.name}`);
-    // Implement actual notification logic here, e.g., setting up reminders or sending notifications.
+  // Handle Notify Me button click for the selected contest
+  const handleNotifyMeClick = async (contestId) => {
+    if (notifyStates[contestId]) return; // Prevent button from being clicked multiple times
+
+    // Update the notify button state for the clicked contest
+    const updatedStates = { ...notifyStates, [contestId]: true };
+    setNotifyStates(updatedStates);
+
+    // Save the updated state to localStorage
+    localStorage.setItem('notifyStates', JSON.stringify(updatedStates));
+
+    // Find the contest by its ID
+    const contest = contests.find(contest => contest.id === contestId);
+
+    if (!contest) {
+      alert('No contest selected!');
+      return;
+    }
+
+    // Get email from localStorage
+    const userEmail = localStorage.getItem('userEmail')
+    
+    if (!userEmail || !/\S+@\S+\.\S+/.test(userEmail)) {
+      alert('Please enter a valid email address!');
+      return;
+    }
+
+    try {
+      console.log(contest.id); console.log(contest.name); console.log(contest.startTimeSeconds)
+      console.log(userEmail)
+      const response = await fetch('http://localhost:3000/api/notify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contestId: contest.id,
+          contestName: contest.name,
+          contestStartTime: contest.startTimeSeconds,
+          email: userEmail, 
+        }),
+      });
+
+      if (response.ok) {
+        alert(`You will be notified about the contest: ${contest.name}`);
+      } else {
+        alert('Failed to send notification request.');
+      }
+    } catch (error) {
+      console.error('Error sending notification:', error);
+      alert('Error occurred while sending notification.');
+    }
   };
 
+  // Fetch contests and notify states on component mount
   useEffect(() => {
     fetchContests();
+    setNotifyStates(loadNotifyStates()); // Load notify states from localStorage
+    setEmail(loadEmail()); // Load email from localStorage
   }, []);
 
   return (
@@ -138,7 +203,13 @@ const CodeforcesCalendar = () => {
           <p><strong>Duration:</strong> {selectedContest.durationSeconds / 60} minutes</p>
 
           {/* Notify Me Button */}
-          <button className="notify-me-btn" onClick={handleNotifyMeClick}>Notify Me</button>
+          <button 
+            className="notify-me-btn" 
+            onClick={() => handleNotifyMeClick(selectedContest.id)} 
+            disabled={notifyStates[selectedContest.id]}
+          >
+            {notifyStates[selectedContest.id] ? 'Notified' : 'Notify Me'}
+          </button>
         </div>
       )}
     </div>

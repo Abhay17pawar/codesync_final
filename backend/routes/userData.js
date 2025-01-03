@@ -1,9 +1,8 @@
-const express = require("express");
-const { getUserRatingById, createUserRating } = require("../controllers/userDataControllers");
-
+const express = require('express');
 const router = express.Router();
+const emailController = require('../controllers/calenderController');
 
-router.get("/user-rating/:id", getUserRatingById);
-router.post("/user-rating", createUserRating);
+// Define the route
+router.post('/notify', emailController.sendMail);
 
 module.exports = router;
