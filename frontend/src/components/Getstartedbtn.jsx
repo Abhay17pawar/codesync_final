@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const GetStartedButton = () => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    // Redirect to Clerk sign-up page
-    window.location.assign('https://warm-sheepdog-53.accounts.dev/sign-up'); // Using window.location.assign for redirection
+   navigate('/signup')
   };
 
   return (

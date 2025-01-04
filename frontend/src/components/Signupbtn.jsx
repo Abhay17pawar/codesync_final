@@ -1,10 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowRight } from 'react-icons/fa'; 
+import { useNavigate } from 'react-router-dom';
 
 const GetStartedButton = () => {
+  const navigate = useNavigate();
   const handleClick = () => {
-    window.location.href = '/signup'; 
+   navigate('/signup')
   };
 
   return (

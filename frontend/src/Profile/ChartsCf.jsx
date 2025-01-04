@@ -88,7 +88,7 @@ const CodeforcesRatingChart = () => {
       style={{
         width: "1050px", 
         height: "400px", 
-        transform: "translate(800px, -1050px)", 
+        transform: "translate(800px, -1084px)", 
         padding: "20px", 
       }}
     >

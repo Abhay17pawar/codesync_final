@@ -6,9 +6,9 @@ const UserCard = ({ user }) => {
     <div style={styles.card}>
       {/* Move the heading inside the card */}
       <h3 style={{fontSize : "25px"}}>Codeforces Rating</h3>
-      <h2>{user.handle}</h2>
-      <p>Max Rank: {user.maxRank}</p>
-      <p>Rating: {user.rating}</p> {/* Display the user's rating */}
+      <h2 style={{fontSize : "18px"}}>{user.handle}</h2>
+      <p style={{fontSize : "18px"}}>Max Rank: {user.maxRank}</p>
+      <p style={{fontSize : "18px"}}>Rating: {user.rating}</p> {/* Display the user's rating */}
     </div>
   );
 };
@@ -75,7 +75,7 @@ const styles = {
     alignItems: 'center', 
     flexWrap: 'wrap',
     gap: '20px',
-     translate: "590px -1900px",
+     translate: "590px -1968px",
     marginTop: '20px',
   },
   card: {

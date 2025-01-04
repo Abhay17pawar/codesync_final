@@ -52,7 +52,7 @@ const Landingpage = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ height: "100vh", overflowY: "scroll" }}>
       <div style={{ position: "relative" }}>
         <h1
           style={{
@@ -106,7 +106,7 @@ const Landingpage = () => {
         <div
           style={{
             position: "absolute",
-            top: "10%", // Adjusting the position below the header
+            top: "10%", 
             left: "50%",
             transform: "translateX(-50%)",
             zIndex: 1,
@@ -168,8 +168,8 @@ const Landingpage = () => {
             padding: "10px",
             borderRadius: "10px",
             fontSize: "25px",
-            fontWeight: "500", // Light weight
-            fontStyle: "italic", // Italic style
+            fontWeight: "500", 
+            fontStyle: "italic",
           }}
           className="animated-text"
         >
@@ -180,14 +180,14 @@ const Landingpage = () => {
         <div
           style={{
             position: "absolute",
-            top: "15%", // Adjust the top positioning for the cards section
+            top: "15%", 
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",
             flexDirection: "row",
             gap: "30px",
             alignItems: "center",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
           }}
         >
           <div
@@ -204,7 +204,6 @@ const Landingpage = () => {
             />
           </div>
 
-          {/* Second Card */}
           <div
             style={{
               backgroundColor: "rgb(215, 233, 215)",
@@ -219,7 +218,6 @@ const Landingpage = () => {
             />
           </div>
 
-          {/* Third Card */}
           <div
             style={{
               backgroundColor: "rgb(215, 233, 215)",
@@ -235,14 +233,13 @@ const Landingpage = () => {
           </div>
         </div>
 
-        {/* Calendar placed below the cards */}
         <div
           style={{
             position: "absolute",
-            top: "64%", // Adjust the top positioning for the calendar
+            top: "64%", 
             left: "65%",
             transform: "translateX(-50%)",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
             padding: "20px",
             borderRadius: "10px",
           }}
@@ -255,33 +252,33 @@ const Landingpage = () => {
             top: "33%", 
             left: "25.4%",
             transform: "translateX(-50%)",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
             padding: "20px",
             borderRadius: "10px",
           }}
         >
-          <Totalques/>
+          <Totalques />
         </div>
         <div
           style={{
             position: "absolute",
-            top: "33%", // Adjust the top positioning for the calendar
+            top: "33%",
             left: "55%",
             transform: "translateX(-50%)",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
             padding: "20px",
             borderRadius: "10px",
           }}
         >
-          <Heatmap/>
+          <Heatmap />
         </div>
         <div
           style={{
             position: "absolute",
-            top: "45%", // Adjust the top positioning for the calendar
+            top: "45%", 
             left: "47%",
             transform: "translateX(-50%)",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
             padding: "20px",
             borderRadius: "10px",
           }}
@@ -294,18 +291,17 @@ const Landingpage = () => {
             top: "45%", 
             left: "69%",
             transform: "translateX(-50%)",
-            zIndex: 1, // Ensure it appears above the canvas
+            zIndex: 1,
             padding: "20px",
             borderRadius: "10px",
           }}
         >
-          <Classification/>
+          <Classification />
         </div>
 
-        {/* Animated canvas */}
         <canvas ref={canvasRef} className="bg-black" />
       </div>
-    </>
+    </div>
   );
 };
 

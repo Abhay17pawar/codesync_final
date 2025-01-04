@@ -11,22 +11,25 @@ import BadgeIcons from '../Profile/BadgesLeetcode';
 import Calendars from './Calender'; // Make sure this path is correct
 import BadgeCF from '../Profile/BadgeCF';
 import UserCard from '../Profile/BadgeCC';
+import DirectedToCalendar from '../components/DirectedToCalender';
+import Text from '../components/Text';
 
 const Homepage = () => {
   return (
     <>
    
-      <Calendars />
-      {/* <div className="h-screen overflow-y-scroll"> 
+      {/* <Calendars /> */}
+      <div className="h-screen overflow-y-scroll"> 
         <div className="flex space-x-6"> 
           <div>
             <ProfileCard />
             <UserButton />
-            <ProfileCard />
             <ProblemsSolved />
+            <DirectedToCalendar/>
           </div>
           <div>
             <Totalques />
+            
             <Totalcontest />
           </div>
           <Heatmaps />
@@ -40,7 +43,7 @@ const Homepage = () => {
           <BadgeCF />
           <UserCard />
         </div>
-      </div> */}
+      </div>
     </>
   );
 };

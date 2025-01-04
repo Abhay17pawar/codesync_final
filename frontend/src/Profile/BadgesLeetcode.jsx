@@ -7,11 +7,11 @@ import Grid from "@mui/material/Grid"; // Import MUI Grid component for responsi
 
 function BadgeIcons() {
   const [badges, setBadges] = useState([]); // State to store the badges
-
+  const userhandle = localStorage.getItem('userleetcode');  // kunal0612
   useEffect(() => {
     // Fetch the data from the API
     axios
-      .get("https://alfa-leetcode-api.onrender.com/kunal0612/badges")
+      .get(`https://alfa-leetcode-api.onrender.com/${userhandle}/badges`)
       .then((response) => {
         const months = [
           "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -28,7 +28,7 @@ function BadgeIcons() {
   }, []); // Run only once when the component mounts
 
   return (
-    <div style={{ textAlign: "center", marginTop: "20px", translate: "130px -1050px" }}>
+    <div style={{ textAlign: "center", marginTop: "20px", translate: "130px -1085px" }}>
       {badges.length > 0 ? (
         <Card
           sx={{
@@ -44,7 +44,7 @@ function BadgeIcons() {
         >
           <CardContent>
             <Typography variant="h4" sx={{ marginBottom: "20px", fontWeight: "100px" }}>
-              Badges
+              Leetcode Badges
             </Typography>
             <Grid container spacing={2} justifyContent="center">
               {badges.map((badge) => {

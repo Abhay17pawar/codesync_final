@@ -34,19 +34,22 @@ const UserCard = () => {
 
   return (
     <div
-      className="w-full max-w-sm bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg shadow-md"
+      className="rounded-lg shadow-md"
       style={{
-        width: "400px", // Adjust container width
-        height: "140px", // Adjust container height
-        padding: "20px",
-        translate: "590px -1500px",        // Adds padding inside the container
+        width: "290px", // Reduced width
+        height: "155px", // Reduced height
+        padding: "10px", // Reduced padding
+        border: "1px solid #ccc",
+        translate: "1195px -1962px",
+        margin: "10px",
       }}
     >
       {/* Display user stars and max rating */}
       <div style={{ marginBottom: "20px", color: "white", textAlign: "center" }}>
-        <h3>CodeChef User Info</h3>
-        <p><strong>Stars:</strong> {userData.stars || 'No stars available'}</p>
-        <p><strong>Max Rating:</strong> {userData.maxRating || 'No rating available'}</p>
+        <h3 style={{fontSize : "25px"}}>CodeChef Rating</h3>
+        <p style={{fontSize : "18px"}}>{storedHandles}</p>
+        <p style={{fontSize : "18px"}}>Stars: {userData.stars || 'No stars available'}</p>
+        <p style={{fontSize : "18px"}}>Max Rating: {userData.maxRating || 'No rating available'}</p>
       </div>
     </div>
   );

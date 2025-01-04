@@ -24,7 +24,7 @@ ChartJS.register(
 
 const RatingChart = () => {
   const [chartData, setChartData] = useState(null);
-  const handle = "abhaypawar0817"; // Hardcoded handle value
+  const handle = localStorage.getItem('usercodechef') 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -88,7 +88,7 @@ const RatingChart = () => {
       style={{
         width: "950px", // Adjust chart container width
         height: "400px", // Adjust chart container height
-        transform: "translate(390px, -650px)", // Moves the chart horizontally and vertically
+        transform: "translate(390px, -684px)", // Moves the chart horizontally and vertically
         padding: "20px", // Adds padding inside the container
       }}
     >

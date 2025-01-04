@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     secure: true,
     auth: {
         user: 'nodemailercodesync@gmail.com',
-        pass: process.env.PASS, // Make sure you have this in your .env
+        pass: process.env.PASS, 
     },
 });
 
