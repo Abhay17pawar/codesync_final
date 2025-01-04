@@ -24,12 +24,12 @@ const CodeforcesCalendar = () => {
   // Fetch notify states from localStorage on page load
   const loadNotifyStates = () => {
     const savedStates = localStorage.getItem('notifyStates');
-    return savedStates ? JSON.parse(savedStates) : {};
+    return savedStates ? JSON.parse(savedStates) : {}; // Load saved states or use empty object if none found
   };
 
   // Fetch email from localStorage on component mount
   const loadEmail = () => {
-    const savedEmail = localStorage.getItem('email');
+    const savedEmail = localStorage.getItem('userEmail');
     return savedEmail ? savedEmail : ''; // Default to empty string if no email found
   };
 
@@ -125,55 +125,40 @@ const CodeforcesCalendar = () => {
 
   // Handle Notify Me button click for the selected contest
   const handleNotifyMeClick = async (contestId) => {
-    if (notifyStates[contestId]) return; // Prevent button from being clicked multiple times
+    if (notifyStates[contestId]) return;
 
-    // Update the notify button state for the clicked contest
-    const updatedStates = { ...notifyStates, [contestId]: true };
-    setNotifyStates(updatedStates);
+    const contest = contests.find(c => c.id === contestId);
+    if (!contest) return alert('No contest found!');
 
-    // Save the updated state to localStorage
-    localStorage.setItem('notifyStates', JSON.stringify(updatedStates));
-
-    // Find the contest by its ID
-    const contest = contests.find(contest => contest.id === contestId);
-
-    if (!contest) {
-      alert('No contest selected!');
-      return;
-    }
-
-    // Get email from localStorage
-    const userEmail = localStorage.getItem('userEmail')
-    
+    const userEmail = email; // Email stored in state
     if (!userEmail || !/\S+@\S+\.\S+/.test(userEmail)) {
-      alert('Please enter a valid email address!');
-      return;
+        return alert('Please enter a valid email address!');
     }
+
+    // Set the notify button as disabled and store it in localStorage
+    setNotifyStates({ ...notifyStates, [contestId]: true });
+    localStorage.setItem('notifyStates', JSON.stringify({ ...notifyStates, [contestId]: true }));
 
     try {
-      console.log(contest.id); console.log(contest.name); console.log(contest.startTimeSeconds)
-      console.log(userEmail)
-      const response = await fetch('http://localhost:3000/api/notify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contestId: contest.id,
-          contestName: contest.name,
-          contestStartTime: contest.startTimeSeconds,
-          email: userEmail, 
-        }),
-      });
+        const response = await fetch('http://localhost:3000/api/notify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contestId: contest.id,
+                contestName: contest.name,
+                contestStartTime: contest.startTimeSeconds,
+                email: userEmail,
+            }),
+        });
 
-      if (response.ok) {
-        alert(`You will be notified about the contest: ${contest.name}`);
-      } else {
-        alert('Failed to send notification request.');
-      }
+        if (response.ok) {
+            alert(`You will be notified about the contest: ${contest.name}`);
+        } else {
+            alert('Failed to send notification.');
+        }
     } catch (error) {
-      console.error('Error sending notification:', error);
-      alert('Error occurred while sending notification.');
+        console.error('Error sending notification:', error);
+        alert('Error occurred while sending notification.');
     }
   };
 
