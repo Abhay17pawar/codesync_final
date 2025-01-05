@@ -80,7 +80,7 @@ const Login = () => {
         console.log("Token and user details successfully stored in localStorage:", token);
   
         // Navigate to the home page after login (or wherever needed)
-        navigate("/"); 
+        navigate("/landingpage"); 
       } else {
         console.error("Token not found in response");
       }
@@ -114,6 +114,18 @@ const Login = () => {
         <button type="submit" className="form-button">
           Login
         </button>
+        <div className="login-link">
+        <p>
+          Don't have an account?{" "}
+          <span 
+            className="login-text-link" 
+            onClick={() => navigate("/signup")}
+            style={{ color: '#39f47e', textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            Signup here
+          </span>
+        </p>
+      </div>
       </form>
 
       {/* Canvas for the Matrix effect */}

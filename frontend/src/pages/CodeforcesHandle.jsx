@@ -6,7 +6,7 @@ import "./CodeforcesHandle.css";
 
 const CodeforcesHandle = () => {
   const canvasRef = useRef(null);
-  const { register, handleSubmit } = useForm(); 
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,13 +57,13 @@ const CodeforcesHandle = () => {
         email: data.email,
         password: data.password,
         codeforces: data.codeforces,
-        leetcode : data.leetcode,
-        codechef : data.codechef
+        leetcode: data.leetcode,
+        codechef: data.codechef,
       });
 
       console.log("Backend response:", response.data);
 
-      navigate("/login");
+      navigate("/login");  // Use navigate to go to login page
     } catch (error) {
       console.error("Error submitting data:", error.response ? error.response.data : error.message);
     }
@@ -73,7 +73,7 @@ const CodeforcesHandle = () => {
     <div className="landingpage">
       <form className="handle-form" onSubmit={handleSubmit(onSubmit)}>
         <h2>Register</h2>
-        
+
         {/* Name Field */}
         <input
           type="text"
@@ -81,7 +81,7 @@ const CodeforcesHandle = () => {
           placeholder="Enter Name"
           className="form-input"
         />
-        
+
         {/* Email Field */}
         <input
           type="email"
@@ -89,7 +89,7 @@ const CodeforcesHandle = () => {
           placeholder="Enter Email ID"
           className="form-input"
         />
-        
+
         {/* Password Field */}
         <input
           type="password"
@@ -101,29 +101,42 @@ const CodeforcesHandle = () => {
         {/* Codeforces Handle Field */}
         <input
           type="text"
-          {...register("codeforces", { required: true })}  
+          {...register("codeforces", { required: true })}
           placeholder="Enter Codeforces Handle"
           className="form-input"
         />
 
         <input
           type="text"
-          {...register("leetcode", { required: true })}  
-          placeholder="Enter leetcode Handle"
+          {...register("leetcode", { required: true })}
+          placeholder="Enter Leetcode Handle"
           className="form-input"
         />
 
         <input
           type="text"
-          {...register("codechef", { required: true })}  
-          placeholder="Enter codechef Handle"
+          {...register("codechef", { required: true })}
+          placeholder="Enter Codechef Handle"
           className="form-input"
         />
 
         <button type="submit" className="form-button">
           Submit
         </button>
+      <div className="login-link">
+        <p>
+          Already have an account?{" "}
+          <span 
+            className="login-text-link" 
+            onClick={() => navigate("/login")}
+            style={{ color: '#39f47e', textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            Login here
+          </span>
+        </p>
+      </div>
       </form>
+
 
       <canvas ref={canvasRef} className="matrix-canvas"></canvas>
     </div>
