@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer');
 const Agenda = require('agenda');
 require('dotenv').config();
 
-// Configure the transporter for email
 const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -36,11 +35,16 @@ agenda.define('send email', async (job) => {
     const mailOptions = {
         from: 'nodemailercodesync@gmail.com',
         to: email,
-        subject: `Reminder: ${contestName}`,
+        subject: `Contest Notification - ${contestName}`,
         html: `
             <h1>Contest Notification</h1>
             <p><strong>Contest Name:</strong> ${contestName}</p>
             <p><strong>Start Time:</strong> ${contestDate}</p>
+            <p>We encourage you to mark your calendars and get ready for an exciting competition. Further details and instructions will follow shortly, so stay tuned for updates! 
+            If you have any questions, feel free to reach out to us.</p>
+            <p>All the best!</p>
+            <p>CodeSync</p>
+            <p>+91 9325289075</p>
         `,
     };
 

@@ -10,7 +10,7 @@ const cors = require('cors');
 app.use(cors());
 const events = require('events');
 
-events.EventEmitter.defaultMaxListeners = 20;
+events.EventEmitter.defaultMaxListeners = 60;
 
 app.use(express.json());
 

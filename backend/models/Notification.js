@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Notification schema
 const notificationSchema = new mongoose.Schema({
   contestId: {
     type: Number,

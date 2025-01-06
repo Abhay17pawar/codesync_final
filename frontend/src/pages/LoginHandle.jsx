@@ -70,11 +70,10 @@ const Login = () => {
       const codechef = response.data.codechef;
   
       if (token) {
-        // Store the token and user info (email and codeforces) in localStorage
-        localStorage.setItem("authToken", token);  // Store the JWT token
+        localStorage.setItem("authToken", token);  
         localStorage.setItem("userName", name);
-        localStorage.setItem("userEmail", email);  // Store the email
-        localStorage.setItem("userCodeforces", codeforces);  // Store the Codeforces handle
+        localStorage.setItem("userEmail", email);  
+        localStorage.setItem("userCodeforces", codeforces);  
         localStorage.setItem("userleetcode", leetcode);  
         localStorage.setItem("usercodechef", codechef);  
         console.log("Token and user details successfully stored in localStorage:", token);
