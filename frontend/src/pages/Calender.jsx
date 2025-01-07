@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './Calender.css'; // Import custom styles
+import './Calender.css'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Import Toast styles
 
 const CodeforcesCalendar = () => {
   const [contests, setContests] = useState([]); // Store the list of contests
@@ -136,8 +138,9 @@ const CodeforcesCalendar = () => {
     }
 
     // Set the notify button as disabled and store it in localStorage
-    setNotifyStates({ ...notifyStates, [contestId]: true });
-    localStorage.setItem('notifyStates', JSON.stringify({ ...notifyStates, [contestId]: true }));
+    const newNotifyStates = { ...notifyStates, [contestId]: true };
+    setNotifyStates(newNotifyStates);
+    localStorage.setItem('notifyStates', JSON.stringify(newNotifyStates));
 
     try {
         const response = await fetch('http://localhost:3000/api/notify', {
@@ -152,7 +155,7 @@ const CodeforcesCalendar = () => {
         });
 
         if (response.ok) {
-            alert(`You will be notified about the contest: ${contest.name}`);
+            toast.success(`You will be notified about the contest: ${contest.name}`);
         } else {
             alert('Failed to send notification.');
         }
@@ -197,6 +200,9 @@ const CodeforcesCalendar = () => {
           </button>
         </div>
       )}
+
+      {/* Toast container */}
+      <ToastContainer />
     </div>
   );
 };
