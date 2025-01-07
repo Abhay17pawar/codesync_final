@@ -32,7 +32,7 @@ const Heatmap = ({ activityData }) => {
       style={{ position: "relative", left: "25px", top: "48px" }}
     >
       <h2 className="text-white text-lg font-semibold mb-4">
-        Activity Heatmap
+        Codeforces Activity Heatmap
       </h2>
       <div className="flex items-start space-x-4 overflow-x-auto p-4">
         {months.map((month, idx) => (
