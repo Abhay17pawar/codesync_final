@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-// Secret key to sign and verify the JWT
-const JWT_SECRET = 'your_secret_key'; // Use a more secure secret key in production
+const JWT_SECRET = process.env.JWT_SECRET; 
 
-// Function to sign a JWT token
 const generateToken = (user) => {
   return jwt.sign(
     {
@@ -15,7 +14,7 @@ const generateToken = (user) => {
       codechef : user.codechef
     },
     JWT_SECRET,
-    { expiresIn: '1h' } // The token will expire in 1 hour
+    { expiresIn: '1h' } 
   );
 };
 
